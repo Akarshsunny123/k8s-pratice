@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service 
+metadata: 
+  name: mysvcdp-infinite
+  namespace: prod
+spec: 
+  type: ClusterIP
+  selector:
+      app: infinite-app
+  ports:
+    - port: 80

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: mydpslideshow
+  namespace: prod
+  annotations:
+    kubernetes.io/change-cause: "Deploy to slideshow"
+spec: 
+  minReadySeconds: 5
+  replicas: 6
+  selector:
+    matchLabels:
+      app: slideshow-app
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%  
+  template:
+    metadata:
+      name: myslideshowpods
+      labels:
+        app: slideshow-app
+    spec:
+      containers:
+        - name: myslideshow-contianers 
+          image: 837402981397.dkr.ecr.us-east-1.amazonaws.com/dev/images:slideshow 
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always   

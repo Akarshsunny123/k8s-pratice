@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: ingress-prod-app
+  namespace: prod 
+spec: 
+  rules:
+    - http: 
+       paths:
+         - path: /zayshop 
+           pathType: Prefix
+           backend: 
+             service: 
+               name: mysvcdp-zayshop
+               port:
+                number: 80
+         - path: /catalog 
+           pathType: Prefix
+           backend:
+            service:
+              name: mysvcdp-catalog
+              port:
+                number: 80
