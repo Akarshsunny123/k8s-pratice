@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: rs-demo
+spec:
+  minReadySeconds: 6
+  replicas: 5
+  selector:
+    matchExpressions:
+      - key: swiggy-demo
+        operator: In
+        values: 
+          - dev-prod
+  template:
+    metadata:
+      name: mypods
+      labels:
+        swiggy-demo: dev-prod
+    spec:
+      containers:
+        - name: myredcontainers
+          image: loanflew/ingress:REDPAGE
+          ports:
+            - containers: 80

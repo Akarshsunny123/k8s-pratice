@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysvcrs
+spec:
+  type: ClusterIp
+  selector:
+    app: redports
+  ports:
+    - port: 80
+      nodeport: 32000
